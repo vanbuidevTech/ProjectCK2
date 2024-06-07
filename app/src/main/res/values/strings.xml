@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RecipeBookApp</string>
+    <string name="label_cooking">Happy cooking!</string>
+    <string name="label_welcome">Welcome back</string>
+
+    <string name="label_category">Category</string>
+    <string name="label_area">Area</string>
+    <string name="label_ingredients">Ingredients</string>
+</resources>
