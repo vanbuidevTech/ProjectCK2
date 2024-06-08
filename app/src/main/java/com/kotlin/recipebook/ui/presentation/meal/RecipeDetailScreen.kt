@@ -60,10 +60,11 @@ fun RecipeDetailScreen(
     mealViewModel: MealViewModel = hiltViewModel()
 ) {
     val state by mealViewModel.getMealState.collectAsState()
-    when(state) {
+    when (state) {
         is GetMealState.Loading -> {
             CustomProgressBar()
         }
+
         is GetMealState.Success -> {
             val scrollState = rememberLazyListState()
             Box {
@@ -78,6 +79,7 @@ fun RecipeDetailScreen(
                 )
             }
         }
+
         is GetMealState.Failure -> {
             ErrorScreen((state as GetMealState.Failure).message) {
 
@@ -205,12 +207,15 @@ fun RecipeInformation(
     LazyColumn(contentPadding = PaddingValues(top = AppBarExpendedHeight), state = scrollState) {
         item {
             LazyRow {
-               item {
-                   RecipeSection(stringResource(id = R.string.label_category), meal.category)
-                   RecipeSection(stringResource(id = R.string.label_area), meal.area)
-               }
+                item {
+                    RecipeSection(stringResource(id = R.string.label_category), meal.category)
+                    RecipeSection(stringResource(id = R.string.label_area), meal.area)
+                }
             }
-            RecipeInformationDetail(stringResource(id = R.string.label_ingredients), meal.ingredients)
+            RecipeInformationDetail(
+                stringResource(id = R.string.label_ingredients),
+                meal.ingredients
+            )
             Spacer(modifier = Modifier.height(20.dp))
             RecipeDescription(
                 meal = meal
@@ -224,16 +229,16 @@ fun RecipeInformation(
 fun RecipeDescription(meal: Meal) {
 
     Text(
-        text =  meal.instructions,
+        text = meal.instructions,
         modifier = Modifier.padding(10.dp)
     )
 
-   Box(
-       modifier = Modifier.fillMaxWidth(),
-       contentAlignment = Alignment.Center
-   ) {
-       VideoButton(meal.video)
-   }
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        VideoButton(meal.video)
+    }
 }
 
 @Composable
@@ -246,7 +251,7 @@ fun VideoButton(
     }
 
     Button(
-        onClick = {  context.startActivity(intent) },
+        onClick = { context.startActivity(intent) },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Red
         )
@@ -309,38 +314,39 @@ fun RecipeInformationDetail(
 }
 
 
-
 @Composable
 fun RecipeSection(
     section: String,
     name: String
-){
+) {
     Box(
         modifier = Modifier
             .padding(15.dp)
     ) {
-            Row(
-                modifier = Modifier
-                    .background(
-                        color = Color(0XFF27AE60),
-                        shape = RoundedCornerShape(20.dp)
-                    )
-                    .padding(8.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = section,
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(5.dp),
-                    color = Color.White
+        Row(
+            modifier = Modifier
+                .background(
+                    color = Color(
+                        0xFF00A5FF
+                    ),
+                    shape = RoundedCornerShape(20.dp)
                 )
-                Text(
-                    text = "● $name",
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.padding(5.dp),
-                    color = Color.White
-                )
-            }
+                .padding(8.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = section,
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier.padding(5.dp),
+                color = Color.White
+            )
+            Text(
+                text = "● $name",
+                style = MaterialTheme.typography.body2,
+                modifier = Modifier.padding(5.dp),
+                color = Color.White
+            )
+        }
     }
 
 }
