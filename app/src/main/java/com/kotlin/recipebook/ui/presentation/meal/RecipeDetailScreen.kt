@@ -211,10 +211,10 @@ fun RecipeInformation(
                }
             }
             RecipeInformationDetail(stringResource(id = R.string.label_ingredients), meal.ingredients)
+            Spacer(modifier = Modifier.height(20.dp))
             RecipeDescription(
                 meal = meal
             )
-            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

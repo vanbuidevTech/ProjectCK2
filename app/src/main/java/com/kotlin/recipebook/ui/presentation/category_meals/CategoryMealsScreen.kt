@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -13,6 +14,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -29,6 +31,7 @@ import com.kotlin.recipebook.data.models.meals.MealCategory
 import com.kotlin.recipebook.ui.presentation.commons.CustomProgressBar
 import com.kotlin.recipebook.ui.presentation.commons.ErrorScreen
 import com.kotlin.recipebook.ui.presentation.navigation.Screen
+import com.kotlin.recipebook.ui.theme.RecipeBookAppTheme
 
 @Composable
 fun CategoryMealsScreen(
@@ -87,7 +90,6 @@ fun CategoryMealsContent(
                 }
             }
         }
-
     }
 }
 
@@ -112,6 +114,7 @@ fun CardCategoryMealListItem(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
+//            .clip(RoundedCornerShape(18.dp)) // Bo tròn các góc với bán kính 12dp
             .clickable {
                 onClick()
             },
@@ -144,8 +147,52 @@ fun CardCategoryMealListItem(
 
 
 
+//@Composable
+//@Preview(showBackground = true)
+//fun PreviewCategoryMealsScreen(){
+//    CategoryMealsScreen(rememberNavController())
+//}
+//
+
+
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
-@Preview(showBackground = true)
-fun PreviewCategoryMealsScreen(){
-    CategoryMealsScreen(rememberNavController())
+fun CategoryPreview() {
+    RecipeBookAppTheme {
+        val navController = rememberNavController()
+        val dummyMeals = listOf(
+            MealCategory(id = "1", name = "Meal 1", image = ""),
+            MealCategory(id = "2", name = "Meal 2", image = ""),
+            MealCategory(id = "3", name = "Meal 3", image = "")
+        )
+        Column {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .size(25.dp)
+                        .clickable {
+                            navController.popBackStack()
+                        }
+                )
+                Text(
+                    text = "Category Name",
+                    style = MaterialTheme.typography.h5
+                )
+            }
+
+            LazyColumn {
+                items(dummyMeals) { meal ->
+                    CardCategoryMealListItem(meal) {
+                        // Preview action
+                    }
+                }
+            }
+        }
+    }
 }
