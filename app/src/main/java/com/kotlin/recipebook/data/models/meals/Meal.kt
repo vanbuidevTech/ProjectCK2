@@ -14,7 +14,7 @@ data class Meal(
     val ingredients: List<Ingredient>
 )
 
-data class MealCategory (
+data class MealCategory(
     @SerializedName("idMeal")
     val id: String = "",
 
@@ -26,7 +26,7 @@ data class MealCategory (
 )
 
 
-data class MealData (
+data class MealData(
     @SerializedName("idMeal")
     val id: String = "",
 
@@ -63,11 +63,11 @@ data class MealData (
     @SerializedName("strIngredient7")
     val ingredient7: String?,
     @SerializedName("strIngredient8")
-    val ingredient8: String? ,
+    val ingredient8: String?,
     @SerializedName("strIngredient9")
-    val ingredient9: String? ,
+    val ingredient9: String?,
     @SerializedName("strIngredient10")
-    val ingredient10: String? ,
+    val ingredient10: String?,
     @SerializedName("strIngredient11")
     val ingredient11: String?,
     @SerializedName("strIngredient12")
@@ -130,7 +130,7 @@ data class MealData (
     @SerializedName("strMeasure20")
     val measure20: String?,
 
-)
+    )
 
 
 fun MealData.toMeal(): Meal {
@@ -182,7 +182,6 @@ fun MealData.toMeal(): Meal {
     ).filter { it != null && it != "" }
 
 
-
     val list = mutableListOf<Ingredient>()
 
     for (i in ingredients.indices) {
@@ -200,6 +199,8 @@ fun MealData.toMeal(): Meal {
         this.instructions,
         list
     )
+
+
 }
 
 data class Ingredient(

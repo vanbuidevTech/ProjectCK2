@@ -1,9 +1,14 @@
 package com.kotlin.recipebook.ui.presentation.home.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -18,11 +23,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import coil.request.ImageRequest
 import com.kotlin.recipebook.R
 import com.kotlin.recipebook.data.models.categories.Category
+import com.kotlin.recipebook.ui.presentation.navigation.Screen
+import com.kotlin.recipebook.ui.theme.RecipeBookAppTheme
 
 @Composable
 fun CardListItem(
@@ -34,8 +39,7 @@ fun CardListItem(
         rememberImagePainter(
             data = item.image,
             builder = {
-                ImageRequest.Builder(context)
-                    .crossfade(true)
+                crossfade(true)
             }
         )
     } else {
@@ -80,13 +84,29 @@ fun CardListItem(
                 )
             }
         }
-
     }
 }
 
-//
-//@Preview
-//@Composable
-//private fun PreviewList() {
-//
-//}
+@OptIn(ExperimentalFoundationApi::class)
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun CategoryPreview() {
+    RecipeBookAppTheme {
+        val listCategory = listOf(
+            Category(id = "1", name = "Meal 1", image = "", description = ""),
+            Category(id = "2", name = "Meal 2", image = "", description = ""),
+            Category(id = "3", name = "Meal 3", image = "", description = ""),
+            Category(id = "4", name = "Meal 4", image = "", description = "")
+        )
+        LazyVerticalGrid(
+            cells = GridCells.Fixed(2),
+            modifier = Modifier.fillMaxHeight()
+        ) {
+            items(listCategory) { item ->
+                CardListItem(item) {
+                    // Handle click event
+                }
+            }
+        }
+    }
+}
