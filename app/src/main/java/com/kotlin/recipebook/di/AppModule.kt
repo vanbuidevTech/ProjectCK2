@@ -1,12 +1,10 @@
 package com.kotlin.recipebook.di
 
-import android.content.Context
 import com.google.gson.GsonBuilder
 import com.kotlin.recipebook.data.service.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
