@@ -35,8 +35,10 @@ fun SearchView(value: String, onValueChange: (String) -> Unit) {
         },
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(0XFFc2c2c2),
-            cursorColor = Color.White,
+            textColor = Color.Black,
+            cursorColor = Color(
+                0xFF00A5FF
+            ),
             leadingIconColor = Color.White,
             trailingIconColor = Color.White,
             backgroundColor = Color(0XFFEDEDED),

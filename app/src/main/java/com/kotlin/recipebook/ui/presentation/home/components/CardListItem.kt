@@ -3,6 +3,7 @@ package com.kotlin.recipebook.ui.presentation.home.components
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
@@ -47,7 +48,7 @@ fun CardListItem(
     }
 
     Card(
-        shape = RoundedCornerShape(5.dp),
+        shape = RoundedCornerShape(8.dp),
         elevation = 5.dp,
         modifier = Modifier
             .padding(10.dp)
@@ -58,7 +59,13 @@ fun CardListItem(
         Box(
             modifier = Modifier
                 .height(150.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .border(
+                    width = 1.dp, color = Color(
+                        0xFF00A5FF
+                    ), shape = RoundedCornerShape(8.dp)
+                ),
+
             contentAlignment = Alignment.BottomCenter
         ) {
             Image(

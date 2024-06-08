@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -16,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,11 +50,13 @@ fun RecipeHomeScreen(
         is GetCategoriesState.Loading -> {
             CustomProgressBar()
         }
+
         is GetCategoriesState.Success -> {
             RecipeHomeContent(
                 navController = navController,
             )
         }
+
         is GetCategoriesState.Failure -> {
             ErrorScreen((categoriesState as GetCategoriesState.Failure).message) {
                 homeViewModel.retryAgain()
@@ -73,12 +77,25 @@ fun RecipeHomeContent(
     val searchQuery by homeViewModel.query.collectAsState(initial = query)
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(20.dp)
+        modifier = Modifier.fillMaxSize()
     ) {
-        RecipeAppBar()
-        SearchView(value = searchQuery) { homeViewModel.onValueChange(it) }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .size(180.dp) // Chiều cao của phần nav
+                .background(color = Color(0xFF00A5FF)) // Màu của phần nav
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(20.dp)
+            ) {
+                RecipeAppBar()
+                Spacer(modifier = Modifier.height(20.dp))
+                SearchView(value = searchQuery) { homeViewModel.onValueChange(it) }
+            }
+        }
+        // Phần dưới: danh sách category
         Spacer(modifier = Modifier.height(20.dp))
         RecipeCategoryList(
             navController = navController,
@@ -86,6 +103,7 @@ fun RecipeHomeContent(
         )
     }
 }
+
 
 @ExperimentalFoundationApi
 @Composable
@@ -125,7 +143,7 @@ fun RecipeAppBar() {
             )
         }
         Image(
-            painter = painterResource(id = R.drawable.mealimage),
+            painter = painterResource(id = R.drawable.baseline_menu_24),
             contentDescription = null,
             modifier = Modifier
                 .clip(CircleShape)
