@@ -206,3 +206,13 @@ data class Ingredient(
     val name: String,
     val measure: String
 )
+
+
+//@SerializedName: Được sử dụng để ánh xạ tên thuộc tính JSON với tên thuộc tính trong lớp.
+
+//Tóm tắt
+//Meal: Đối tượng chính đại diện cho món ăn.
+//MealCategory: Đại diện cho danh mục món ăn với thông tin cơ bản.
+//MealData: Đại diện cho dữ liệu món ăn chi tiết từ API.
+//toMeal: Hàm mở rộng để chuyển đổi từ MealData sang Meal.
+//Ingredient: Đại diện cho thành phần của món ăn với tên và số đo.

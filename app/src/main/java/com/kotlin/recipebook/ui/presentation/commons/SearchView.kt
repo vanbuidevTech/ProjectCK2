@@ -2,6 +2,7 @@ package com.kotlin.recipebook.ui.presentation.commons
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -10,13 +11,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun SearchView(value: String, onValueChange: (String) -> Unit ){
+fun SearchView(value: String, onValueChange: (String) -> Unit) {
     TextField(
         value = value,
         onValueChange = {
@@ -42,6 +44,9 @@ fun SearchView(value: String, onValueChange: (String) -> Unit ){
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent
         ),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .size(56.dp) // Chiều cao của ô tìm kiếm
+            .clip(RoundedCornerShape(48.dp)) // Bo tròn các góc với bán kính 12dp
     )
 }

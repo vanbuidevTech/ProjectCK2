@@ -63,9 +63,11 @@ class RecipeHomeViewModel @Inject constructor(
     fun onValueChange(value: String) {
         viewModelScope.launch {
             _query.value = value
-            _categoryList.value = _originalCategoryList.value.filter { it.name.contains(value) }
+            val originalList = _originalCategoryList.value // Collect the value of StateFlow
+            _categoryList.value = originalList.filter { it.name.contains(value) }
         }
     }
+
 
 
 }
